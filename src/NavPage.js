@@ -1,4 +1,5 @@
 import {useState, useEffect} from 'react';
+import { Link } from "react-router-dom";
 import axios from 'axios';
 
 import Movie from "./Movie";
@@ -6,6 +7,7 @@ import Movie from "./Movie";
 import styled from "styled-components";
 
 export default function NavPage () {
+
     const[movies, setMovies] = useState([]);
 
     useEffect(() => {
@@ -24,7 +26,10 @@ export default function NavPage () {
             <MainPage>
                 <h2>Selecione o filme</h2>
                 <div>
-                    {movies.map((element, index) => <Movie key={index} image={element.posterURL} />)}
+                    {movies.map((element, index) => 
+                    <Link to='/Buyticket'>
+                        <Movie key={index} idMovie={element.id} image={element.posterURL} /> 
+                    </Link>)}
                 </div>
             </MainPage>
         </>
@@ -42,7 +47,7 @@ const MainPage = styled.div`
     & > div {
         display: flex;
         flex-wrap: wrap;
-        
+
     }
     h2 {
         color: #293845;

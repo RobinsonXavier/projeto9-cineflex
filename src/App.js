@@ -4,6 +4,7 @@ import './assets/styles/reset.css';
 import './assets/styles/style.css';
 import Top from "./Top";
 import NavPage from './NavPage';
+import BuyTicket from './BuyTicket';
 
 export default function App () {
     return (
@@ -11,8 +12,8 @@ export default function App () {
             <Top />
             <Routes>
                 <Route path='/' element={<NavPage />} />
+                <Route path='/Buyticket' element={<BuyTicket />} />
             </Routes>
-
         </BrowserRouter>
     )
 }
