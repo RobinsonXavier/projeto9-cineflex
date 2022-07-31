@@ -1,10 +1,10 @@
 import styled from "styled-components";
 
-export default function Movie ({image, idMovie}) {
+export default function Movie ({image}) {
     return (
         <>
             <MovieLayout>
-                <img src={image} />
+                <img src={image} alt='' />
             </MovieLayout>
         </>
     )
@@ -20,7 +20,7 @@ const MovieLayout = styled.div`
     align-items: center;
     box-shadow: 1px 1px 2px rgba(0, 0, 0, 0.2);
     margin: 15px;
-    
+
     img {
         height: 193px;
         width: 129px;

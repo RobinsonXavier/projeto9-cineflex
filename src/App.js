@@ -1,3 +1,4 @@
+import {useState} from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
 import './assets/styles/reset.css';
@@ -8,13 +9,16 @@ import BuyTicket from './BuyTicket';
 import Session from './Session';
 
 export default function App () {
+
+    const [click, setClick] = useState(true);
+
     return (
         <BrowserRouter>
             <Top />
             <Routes>
                 <Route path='/' element={<NavPage />} />
                 <Route path='/assentos' element={<BuyTicket />} />
-                <Route path='/sessoes' element={<Session />} />
+                <Route path='/sessoes/:idFilme' element={<Session />} />
             </Routes>
         </BrowserRouter>
     )

@@ -19,6 +19,9 @@ height: 67px;
 display: flex;
 justify-content: center;
 align-items: center;
+position: fixed;
+top: 0;
+z-index: 1;
 
 h1 {
     font-family: 'Roboto', sans-serif; 

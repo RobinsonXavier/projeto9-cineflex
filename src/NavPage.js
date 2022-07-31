@@ -8,7 +8,7 @@ import styled from "styled-components";
 
 export default function NavPage () {
 
-    const[movies, setMovies] = useState([]);
+    const [movies, setMovies] = useState([]);
 
     useEffect(() => {
         const promise = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/movies');
@@ -16,7 +16,6 @@ export default function NavPage () {
         promise.catch(console.log(promise));
 
         promise.then((res) => {
-            console.log(res.data);
             setMovies(res.data)
         })
     }, []);
@@ -27,8 +26,8 @@ export default function NavPage () {
                 <h2>Selecione o filme</h2>
                 <div>
                     {movies.map((element, index) => 
-                    <Link to='/sessoes'>
-                        <Movie key={index} idMovie={element.id} image={element.posterURL} /> 
+                    <Link key={index} to={`/sessoes/${element.id}`}>
+                        <Movie image={element.posterURL} /> 
                     </Link>)}
                 </div>
             </MainPage>
@@ -39,6 +38,7 @@ export default function NavPage () {
 const MainPage = styled.div`
     font-family: 'Roboto', sans-serif;
     background-color: #E5E5E5;
+    margin-top: 67px;
 
     display: flex;
     align-items: center;
