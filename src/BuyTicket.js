@@ -1,7 +1,10 @@
+import {useState, useEffect} from 'react';
+
 import styled from "styled-components";
 
 
 export default function BuyTicket () {
+
     return (
         <>
             <Selection>
@@ -29,6 +32,12 @@ export default function BuyTicket () {
 }
 
 function Chair () {
+    const colorAvailable ='#C3CFD9';
+    const borderAvailable='#7B8B99';
+    const colorUnavailable='#FBE192';
+    const borderUnavailable='#F7C52B';
+    const colorSelected='#8DD7CF';
+    const borderSelected='#1AAE9E';
     return (
         <>
             <Chair>
@@ -37,6 +46,20 @@ function Chair () {
         </>
     )
 }
+
+const Chair = styled.div`
+    width: 25px;
+    height: 25px;
+    background-color: #8DD7CF;
+    border: 1px solid #1AAE9E;
+    border-radius: 50%;
+
+    & > span {
+        font-family: 'Roboto', sans-serif;
+        font-size: 11px;
+        color: #000000;
+    }
+`;
 
 const Selection = styled.div`
     background-color: #E5E5E5;

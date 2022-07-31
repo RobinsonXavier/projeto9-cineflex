@@ -1,13 +1,32 @@
+import {Link} from 'react-router-dom';
+
 import styled from "styled-components";
 
-export default function Pass ({hour, hourTwo, weekday, date}) {
+export default function Pass ({hour, hourTwo, weekday, date, setHourDay, 
+    setWeekday, setName, name, setDate, sessionId, sessionIdTwo}) {
     return (
         <>
             <TicketPage>
                 <span>{weekday} - {date}</span>
                 <div>
-                    <Time>{hour}</Time>
-                    <Time>{hourTwo}</Time>
+                    <Link to={`/assentos/${sessionId}`}>
+                        <Time onClick={() => {
+                            setHourDay(hour);
+                            setWeekday(weekday);
+                            setName(name);
+                            setDate(date);
+                        }} >{hour}
+                        </Time>
+                    </Link>
+                    <Link to={`/assentos/${sessionIdTwo}`}>
+                        <Time onClick={() => {
+                            setHourDay(hourTwo);
+                            setWeekday(weekday);
+                            setName(name);
+                        }} >{hourTwo}
+                        </Time>
+                    </Link>
+                    
                 </div>
             </TicketPage>
         </>
@@ -28,6 +47,11 @@ const TicketPage = styled.div `
         display: flex;
         justify-content: flex-start;
     }
+
+    a {
+        margin-right: 10px;
+        text-decoration: none;
+    }
 `;
 
 const Time = styled.div`
@@ -40,5 +64,4 @@ const Time = styled.div`
     width: 83px;
     height: 43px;
     border-radius: 3px;
-    margin-right: 10px;
 `;

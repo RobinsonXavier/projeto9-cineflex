@@ -11,14 +11,19 @@ import Session from './Session';
 export default function App () {
 
     const [click, setClick] = useState(true);
+    const [name, setName] = useState('');
+    const [weekday, setWeekday] = useState('');
+    const [hourDay, setHourDay] = useState('');
+    const [date, setDate] = useState('');
 
     return (
         <BrowserRouter>
             <Top />
             <Routes>
                 <Route path='/' element={<NavPage />} />
-                <Route path='/assentos' element={<BuyTicket />} />
-                <Route path='/sessoes/:idFilme' element={<Session />} />
+                <Route path='/assentos/:idSessao' element={<BuyTicket />} />
+                <Route path='/sessoes/:idFilme' element={<Session setHourDay={setHourDay}
+                setDate={setDate} setWeekday={setWeekday} setName={setName} />} />
             </Routes>
         </BrowserRouter>
     )

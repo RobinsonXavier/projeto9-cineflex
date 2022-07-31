@@ -9,7 +9,7 @@ import Pass from './Pass';
 
 
 
-export default function Session () {
+export default function Session ({setHourDay, setWeekday, setName, setDate}) {
     const [session, setSession] = useState({});
     const [sessionDays, setSessionDays] = useState([]);
     const {idFilme} = useParams();
@@ -36,7 +36,10 @@ export default function Session () {
                 <h2>Selecione o horário</h2>
                 <div>
                     {sessionDays.map((element, index) => 
-                        <Pass key={index} weekday={element.weekday} date={element.date} hour={element.showtimes[0].name} hourTwo={element.showtimes[1].name}/>          
+                        <Pass key={index} setHourDay={setHourDay} setWeekday={setWeekday} setName={setName} 
+                        weekday={element.weekday} date={element.date} name={session.title} setDate={setDate}
+                        hour={element.showtimes[0].name} hourTwo={element.showtimes[1].name}
+                        sessionId={element.showtimes[0].id} sessionIdTwo={element.showtimes[1].id} />          
                     )}
                 </div>
                 <Bottom>
