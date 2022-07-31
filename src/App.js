@@ -5,6 +5,7 @@ import './assets/styles/style.css';
 import Top from "./Top";
 import NavPage from './NavPage';
 import BuyTicket from './BuyTicket';
+import Session from './Session';
 
 export default function App () {
     return (
@@ -12,7 +13,8 @@ export default function App () {
             <Top />
             <Routes>
                 <Route path='/' element={<NavPage />} />
-                <Route path='/Buyticket' element={<BuyTicket />} />
+                <Route path='/assentos' element={<BuyTicket />} />
+                <Route path='/sessoes' element={<Session />} />
             </Routes>
         </BrowserRouter>
     )

@@ -7,7 +7,7 @@ export default function BuyTicket () {
             <Selection>
                 <h2>Selecione o(s) assentos(s)</h2>
                 <div>
-
+                    
                 </div>
                 <Options>
                     <CheckSit>

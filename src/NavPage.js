@@ -27,7 +27,7 @@ export default function NavPage () {
                 <h2>Selecione o filme</h2>
                 <div>
                     {movies.map((element, index) => 
-                    <Link to='/Buyticket'>
+                    <Link to='/sessoes'>
                         <Movie key={index} idMovie={element.id} image={element.posterURL} /> 
                     </Link>)}
                 </div>
