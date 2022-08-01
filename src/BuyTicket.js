@@ -4,11 +4,13 @@ import {useParams} from 'react-router-dom';
 import styled from "styled-components";
 
 
-export default function BuyTicket ({setSeat, seat}) {
+export default function BuyTicket ({setSeat, seat, setCpf, setUserName}) {
 
     const [selection, setSelection] = useState({}); 
     const [seats, setSeats] = useState([]);
     const {idSessao} = useParams();
+
+    const blankName ='';
 
     useEffect(() => {
 
@@ -22,7 +24,7 @@ export default function BuyTicket ({setSeat, seat}) {
 
     }, [])
 
-    console.log(seats)
+    console.log(selection)
     return (
         <>
             <Selection>
@@ -44,7 +46,22 @@ export default function BuyTicket ({setSeat, seat}) {
                         <span>indisponível</span>
                     </CheckSit>
                 </Options>
-                
+                <form>
+                    <h3>Nome do comprador:</h3>
+                    <input type='text' placeholder='Digite seu nome...' required onChange={e => setUserName(e.target.value)} />
+                    <h3>CPF do comprador:</h3>
+                    <input type='number' placeholder='Digite seu CPF...' required onChange={e => setCpf(e.target.value)} />
+                    <button type='submit'>Reserver Assento(s)</button>
+                </form>
+                <Bottom>
+                    <div>
+                        <img src={selection.movie.posterURL} alt=''/>
+                    </div> 
+                    <footer>
+                        <span>{selection.movie.title}</span>
+                        <span>{selection.day.weekday} - {selection.name}</span>
+                    </footer>     
+                </Bottom>
             </Selection>
         </>
     )
@@ -111,6 +128,8 @@ const Selection = styled.div`
     display: flex;
     align-items: center;
     flex-direction: column;
+    margin-top: 67px;
+    margin-bottom: 130px;
 
     h2 {
         margin: 35px;
@@ -118,6 +137,47 @@ const Selection = styled.div`
         color: #293845;
         font-size: 24px;
     }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        margin-top: 50px;
+        width: 370px;
+    }
+
+    h3 {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        color: #293845;
+        margin: 0 auto;
+        margin-bottom: 3px;
+        margin-top: 7px;
+        width: 327px;
+    }
+
+    input {
+        font-family: 'Roboto', sans-serif;
+        font-size: 18px;
+        height: 51px;
+        width: 327px;
+        text-align: start;
+        border: 1px solid #D4D4D4;
+        border-radius: 3px;
+        margin: 0 auto;
+    }
+
+    button {
+        width: 225px;
+        height: 42px;
+        background-color: #E8833A;
+        font-size: 18px;
+        color: #ffffff;
+        border: none;
+        border-radius: 3px;
+        margin: 30px auto;
+    }
+
 `;
 
 const CheckSit = styled.div`
@@ -174,4 +234,38 @@ const Seats = styled.div`
     margin: 0 auto;
     width: 360px;
     margin-bottom: 30px;
+`;
+
+const Bottom = styled.div`
+    background-color: #9EADBA;
+    position: fixed;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    height: 120px;
+    width: 100%;
+    bottom: 0;
+    z-index: 1;
+
+    & > div {
+        background-color: #ffffff;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 64px;
+        height: 89px;
+        margin:0 15px
+    }
+    & > div > img {
+        width: 48px;
+        height: 72px;
+    }
+
+    & span {
+        display: block;
+        font-family: 'Roboto', sans-serif;
+        font-size: 22px;
+        color: #293845;
+        margin-bottom: 3px;
+    }
 `;

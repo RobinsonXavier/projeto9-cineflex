@@ -9,8 +9,8 @@ import BuyTicket from './BuyTicket';
 import Session from './Session';
 
 export default function App () {
-
-    const [click, setClick] = useState(true);
+    const [userName, setUserName] = useState('');
+    const [cpf, setCpf] = useState('');
     const [name, setName] = useState('');
     const [weekday, setWeekday] = useState('');
     const [hourDay, setHourDay] = useState('');
@@ -22,7 +22,7 @@ export default function App () {
             <Top />
             <Routes>
                 <Route path='/' element={<NavPage />} />
-                <Route path='/assentos/:idSessao' element={<BuyTicket setSeat={setSeat} seat={seat} />} />
+                <Route path='/assentos/:idSessao' element={<BuyTicket setCpf={setCpf} setUserName={setUserName} setSeat={setSeat} seat={seat} />} />
                 <Route path='/sessoes/:idFilme' element={<Session setHourDay={setHourDay}
                 setDate={setDate} setWeekday={setWeekday} setName={setName} />} />
             </Routes>
