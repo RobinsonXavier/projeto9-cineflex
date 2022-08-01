@@ -7,6 +7,7 @@ import Top from "./Top";
 import NavPage from './NavPage';
 import BuyTicket from './BuyTicket';
 import Session from './Session';
+import Sucess from './Sucess';
 
 export default function App () {
     const [userName, setUserName] = useState('');
@@ -22,9 +23,12 @@ export default function App () {
             <Top />
             <Routes>
                 <Route path='/' element={<NavPage />} />
-                <Route path='/assentos/:idSessao' element={<BuyTicket setCpf={setCpf} setUserName={setUserName} setSeat={setSeat} seat={seat} />} />
+                <Route path='/assentos/:idSessao' element={<BuyTicket setCpf={setCpf} setUserName={setUserName} 
+                setSeat={setSeat} seat={seat} userName={userName} cpf={cpf}  />} />
                 <Route path='/sessoes/:idFilme' element={<Session setHourDay={setHourDay}
                 setDate={setDate} setWeekday={setWeekday} setName={setName} />} />
+                <Route path='/sucesso' element={<Sucess userName={userName} cpf={cpf} name={name} date={date} 
+                hourDay={hourDay} seat={seat} />} />
             </Routes>
         </BrowserRouter>
     )

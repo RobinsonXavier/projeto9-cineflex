@@ -1,16 +1,15 @@
 import {useState, useEffect} from 'react';
+import {useParams, useNavigate} from 'react-router-dom';
 import axios from 'axios';
-import {useParams} from 'react-router-dom';
 import styled from "styled-components";
 
 
-export default function BuyTicket ({setSeat, seat, setCpf, setUserName}) {
+export default function BuyTicket ({setSeat, seat, setCpf, setUserName, userName, cpf}) {
 
-    const [selection, setSelection] = useState({}); 
+    const [selection, setSelection] = useState(0); 
     const [seats, setSeats] = useState([]);
     const {idSessao} = useParams();
-
-    const blankName ='';
+    const navigate = useNavigate();
 
     useEffect(() => {
 
@@ -24,13 +23,27 @@ export default function BuyTicket ({setSeat, seat, setCpf, setUserName}) {
 
     }, [])
 
+    function reserveSeats (event) {
+        event.preventDefault();
+
+        const request = axios.post(`https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many`, {
+            ids: seat,
+            name: userName,
+            cpf: cpf
+        });
+
+        request.then(() => {
+            navigate('/sucesso');
+        })
+    }
+    console.log(seat)
     console.log(selection)
     return (
         <>
             <Selection>
                 <h2>Selecione o(s) assentos(s)</h2>
                 <Seats>
-                    {seats.map((element, index) => <Chair key={index} seat={seat} setSeat={setSeat} name={element.name} isAvailable={element.isAvailable} />)}
+                    {seats.map((element, index) => <Chair key={index} seat={seat} setSeat={setSeat} id={element.id} name={element.name} isAvailable={element.isAvailable} />)}
                 </Seats>
                 <Options>
                     <CheckSit>
@@ -46,7 +59,7 @@ export default function BuyTicket ({setSeat, seat, setCpf, setUserName}) {
                         <span>indisponível</span>
                     </CheckSit>
                 </Options>
-                <form>
+                <form onSubmit={reserveSeats}>
                     <h3>Nome do comprador:</h3>
                     <input type='text' placeholder='Digite seu nome...' required onChange={e => setUserName(e.target.value)} />
                     <h3>CPF do comprador:</h3>
@@ -55,11 +68,11 @@ export default function BuyTicket ({setSeat, seat, setCpf, setUserName}) {
                 </form>
                 <Bottom>
                     <div>
-                        <img src={selection.movie.posterURL} alt=''/>
+                        <img src={selection ? selection.movie.posterURL : ''} alt=''/>
                     </div> 
                     <footer>
-                        <span>{selection.movie.title}</span>
-                        <span>{selection.day.weekday} - {selection.name}</span>
+                        <span>{selection ? selection.movie.title : 'Carregando...'}</span>
+                        <span>{selection ? selection.day.weekday : 'Carregando o dia'} - {selection ? selection.name : 'Carregando a hora'}</span>
                     </footer>     
                 </Bottom>
             </Selection>
@@ -67,7 +80,7 @@ export default function BuyTicket ({setSeat, seat, setCpf, setUserName}) {
     )
 }
 
-function Chair ({name, isAvailable, setSeat, seat}) {
+function Chair ({name, isAvailable, setSeat, seat, id}) {
     const colorAvailable ='#C3CFD9';
     const borderAvailable='#7B8B99';
     const colorUnavailable='#FBE192';
@@ -94,9 +107,26 @@ function Chair ({name, isAvailable, setSeat, seat}) {
     return (
         <>
             <Seat onClick={() => {
-                color === colorAvailable ? setColor('#8DD7CF') : setColor(color);
-                border === borderAvailable ? setBorder('#1AAE9E') : setBorder(border);
-                color === colorAvailable ? setSeat([...seat, name]) : setSeat(seat);
+                if (color === colorAvailable) {
+                    setColor('#8DD7CF');
+                    setBorder('#1AAE9E');
+                    setSeat([...seat, id]);
+                } else if (color === '#8DD7CF') {
+                    setColor(colorAvailable);
+                    setBorder(borderAvailable);
+                    if(seat.length === 1) {
+                        setSeat([]);
+                    } else {
+                        let arr = [];
+                        for (let i = 0; i < seat.length -1; i++) {
+                            arr[i] = seat[i]  
+                        }
+                        setSeat(arr);
+
+                    }
+                } else {
+                    return alert('Esse assento não está disponível');
+                }
 
             }} color={color} border={border} >
                 <span>{name}</span>

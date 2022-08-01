@@ -92,4 +92,10 @@ const Bottom = styled.div`
         width: 48px;
         height: 72px;
     }
+
+    & span {
+        font-family: 'Roboto', sans-serif;
+        font-size: 22px;
+        color: #293845;
+    }
 `;
