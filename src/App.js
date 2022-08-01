@@ -15,13 +15,14 @@ export default function App () {
     const [weekday, setWeekday] = useState('');
     const [hourDay, setHourDay] = useState('');
     const [date, setDate] = useState('');
+    const [seat, setSeat] = useState([]);
 
     return (
         <BrowserRouter>
             <Top />
             <Routes>
                 <Route path='/' element={<NavPage />} />
-                <Route path='/assentos/:idSessao' element={<BuyTicket />} />
+                <Route path='/assentos/:idSessao' element={<BuyTicket setSeat={setSeat} seat={seat} />} />
                 <Route path='/sessoes/:idFilme' element={<Session setHourDay={setHourDay}
                 setDate={setDate} setWeekday={setWeekday} setName={setName} />} />
             </Routes>

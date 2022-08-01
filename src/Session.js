@@ -28,8 +28,6 @@ export default function Session ({setHourDay, setWeekday, setName, setDate}) {
 
     }, []);
 
-    console.log(session, sessionDays)
-
     return (
         <>
             <SessionPage>
