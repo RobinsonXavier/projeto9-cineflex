@@ -1,7 +1,11 @@
-import {Link} from 'react-router-dom';
+import {useNavigate} from 'react-router-dom';
 import styled from "styled-components";
 
-export default function Sucess ({userName, cpf, name, date, hourDay, seat}) {
+export default function Sucess ({userName, cpf, name, date, hourDay,
+     setSeat, seatName, setSeatName, setUserName, setCpf, setName, setWeekday, setHourDay, setDate}) {
+
+    const navigate = useNavigate();
+
     return (
         <>
             <SucessPage>
@@ -14,16 +18,27 @@ export default function Sucess ({userName, cpf, name, date, hourDay, seat}) {
                 </div>
                 <div>
                     <h2>Ingressos</h2>
-                    {seat.map((element, index) => <span key={index} >Assento {element}</span>)}
+                    {seatName.map((element, index) => <span key={index} >Assento {element}</span>)}
                 </div>
                 <div>
                     <h2>Comprador</h2>
                     <span>Nome: {userName}</span>
                     <span>CPF: {cpf}</span>
                 </div>
-                <Link to='/'>
-                    <button>Voltar pra home</button>
-                </Link>
+
+                <button onClick={() => {
+                    setSeat([]);
+                    setSeatName([]);
+                    setUserName('');
+                    setCpf('');
+                    setName('');
+                    setWeekday('');
+                    setHourDay('');
+                    setDate('');
+                    navigate('/');
+                    
+                }}>Voltar pra home</button>
+
             </SucessPage>
         </>
     )
@@ -31,6 +46,9 @@ export default function Sucess ({userName, cpf, name, date, hourDay, seat}) {
 
 const SucessPage = styled.div`
     margin-top: 67px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
 
     h1 {
         display: block;
@@ -40,7 +58,7 @@ const SucessPage = styled.div`
         font-size: 24px;
         color: #247A6B;
         margin: 0 auto;
-        margin-top: 97px;
+        margin-top: 30px;
         margin-bottom: 70px;
     }
 
@@ -68,7 +86,7 @@ const SucessPage = styled.div`
         color: #ffffff;
         border: none;
         border-radius: 3px;
-        margin: 30px auto;
+        margin: 60px auto;
     }
 
 `;

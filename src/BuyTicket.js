@@ -4,7 +4,7 @@ import axios from 'axios';
 import styled from "styled-components";
 
 
-export default function BuyTicket ({setSeat, seat, setCpf, setUserName, userName, cpf}) {
+export default function BuyTicket ({setSeat, seat, setCpf, setUserName, userName, cpf, seatName, setSeatName}) {
 
     const [selection, setSelection] = useState(0); 
     const [seats, setSeats] = useState([]);
@@ -43,7 +43,7 @@ export default function BuyTicket ({setSeat, seat, setCpf, setUserName, userName
             <Selection>
                 <h2>Selecione o(s) assentos(s)</h2>
                 <Seats>
-                    {seats.map((element, index) => <Chair key={index} seat={seat} setSeat={setSeat} id={element.id} name={element.name} isAvailable={element.isAvailable} />)}
+                    {seats.map((element, index) => <Chair key={index} seatName={seatName} setSeatName={setSeatName} seat={seat} setSeat={setSeat} id={element.id} name={element.name} isAvailable={element.isAvailable} />)}
                 </Seats>
                 <Options>
                     <CheckSit>
@@ -80,7 +80,7 @@ export default function BuyTicket ({setSeat, seat, setCpf, setUserName, userName
     )
 }
 
-function Chair ({name, isAvailable, setSeat, seat, id}) {
+function Chair ({name, isAvailable, setSeat, seat, id, seatName, setSeatName}) {
     const colorAvailable ='#C3CFD9';
     const borderAvailable='#7B8B99';
     const colorUnavailable='#FBE192';
@@ -111,18 +111,22 @@ function Chair ({name, isAvailable, setSeat, seat, id}) {
                     setColor('#8DD7CF');
                     setBorder('#1AAE9E');
                     setSeat([...seat, id]);
+                    setSeatName([...seatName, name])
                 } else if (color === '#8DD7CF') {
                     setColor(colorAvailable);
                     setBorder(borderAvailable);
                     if(seat.length === 1) {
                         setSeat([]);
+                        setSeatName([]);
                     } else {
                         let arr = [];
+                        let arrName = [];
                         for (let i = 0; i < seat.length -1; i++) {
-                            arr[i] = seat[i]  
+                            arr[i] = seat[i];
+                            arrName[i] = seatName[i];  
                         }
                         setSeat(arr);
-
+                        setSeatName(arrName);
                     }
                 } else {
                     return alert('Esse assento não está disponível');

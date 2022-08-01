@@ -17,6 +17,7 @@ export default function App () {
     const [hourDay, setHourDay] = useState('');
     const [date, setDate] = useState('');
     const [seat, setSeat] = useState([]);
+    const [seatName, setSeatName] = useState([]);
 
     return (
         <BrowserRouter>
@@ -24,11 +25,13 @@ export default function App () {
             <Routes>
                 <Route path='/' element={<NavPage />} />
                 <Route path='/assentos/:idSessao' element={<BuyTicket setCpf={setCpf} setUserName={setUserName} 
-                setSeat={setSeat} seat={seat} userName={userName} cpf={cpf}  />} />
+                setSeat={setSeat} seat={seat} userName={userName} cpf={cpf} setSeatName={setSeatName} seatName={seatName}  />} />
                 <Route path='/sessoes/:idFilme' element={<Session setHourDay={setHourDay}
                 setDate={setDate} setWeekday={setWeekday} setName={setName} />} />
                 <Route path='/sucesso' element={<Sucess userName={userName} cpf={cpf} name={name} date={date} 
-                hourDay={hourDay} seat={seat} />} />
+                hourDay={hourDay} setSeat={setSeat} seatName={seatName} setSeatName={setSeatName}
+                setUserName={setUserName} setCpf={setCpf} setName={setName} setWeekday={setWeekday}
+                setHourDay={setHourDay} setDate={setDate}  />} />
             </Routes>
         </BrowserRouter>
     )
